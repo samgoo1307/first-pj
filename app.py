@@ -59,7 +59,7 @@ def run_investment_analysis(stock_ticker, risk_level):
         backstory=f'너는 시장의 현재 가격을 가장 중요하게 생각하는 월가 출신 분석가야. 현재가 ${current_price}를 기준으로 실현 가능한 목표를 세워.',
         llm=my_llm,
         tools=[FinancialTool(), SerperDevTool()],
-        allow_delegation=False
+        allow_delegation=False,
         max_iter=3, # [중요] 에이전트가 너무 오래 고민하지 않게 실행 횟수 제한 (API 호출 감소)
         verbose=True
     )
@@ -164,5 +164,6 @@ if btn:
         except Exception as e:
 
             st.error(f"오류 발생: {e}")
+
 
 
