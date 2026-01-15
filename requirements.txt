@@ -2,7 +2,7 @@ streamlit
 yfinance
 pandas
 plotly
-crewai==0.28.8
-crewai-tools==0.1.6
+crewai
+crewai-tools
 python-dotenv
 pydantic>=2.4.2
