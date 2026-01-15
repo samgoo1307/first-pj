@@ -36,6 +36,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # [3] 분석 함수
+@st.cache_data(ttl=3600)
 def run_investment_analysis(stock_ticker, risk_level):
     today_date = datetime.now().strftime("%Y-%m-%d")
     my_llm = "gemini/gemini-2.0-flash"
@@ -69,6 +70,11 @@ def run_investment_analysis(stock_ticker, risk_level):
         - 현재가(${current_price})를 반드시 확인하고, 이를 바탕으로 목표가와 손절가를 설정하세요.
         - 목표가는 현재가 대비 논리적인 상승 여력(보통 10~30%) 내에서, 손절가는 리스크 관리 범위 내에서 설정하세요.
         - 현재가와 터무니없이 동떨어진 숫자(예: 200불 주식을 600불로 설정)는 절대 금지입니다.
+        
+        [중요: API 절약 지시]
+        1. 웹 검색(Serper)은 최신 뉴스 확인을 위해 딱 2~3회만 수행하세요.
+        2. 나머지는 제공된 재무 도구(FinancialTool) 데이터만 활용하세요.
+        3. 불필요한 반복 검색을 금지합니다.
         
         [리포트 구성]
         1. 실적 분석: 최근 재무 지표 요약
@@ -156,3 +162,4 @@ if btn:
         except Exception as e:
 
             st.error(f"오류 발생: {e}")
+
