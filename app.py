@@ -117,7 +117,7 @@ def plot_stock_chart(ticker, target_price=None, stop_loss=None):
         st.error(f"차트 오류: {e}")
 
 # [5] 메인 화면 레이아웃
-st.title("🚀 AI 주식 전략 시스템")
+st.title("🚀 AI 주식 종목 분석")
 
 with st.sidebar:
     st.header("⚙️ 설정")
@@ -154,4 +154,5 @@ if btn:
                 st.success("분석 완료")
 
         except Exception as e:
+
             st.error(f"오류 발생: {e}")
