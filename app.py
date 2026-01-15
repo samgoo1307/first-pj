@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 from crewai import Agent, Task, Crew, Process
-from crewai.tools import BaseTool
+from crewai_tools import BaseTool
 from crewai_tools import SerperDevTool
 from dotenv import load_dotenv
 import re
@@ -164,6 +164,7 @@ if btn:
         except Exception as e:
 
             st.error(f"오류 발생: {e}")
+
 
 
 
