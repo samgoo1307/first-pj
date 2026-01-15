@@ -9,6 +9,7 @@ from crewai_tools import BaseTool
 from crewai_tools import SerperDevTool
 from dotenv import load_dotenv
 import re
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # [1] 환경 설정
 os.environ["CREWAI_TELEMETRY_OPT_OUT"] = "true"
@@ -39,7 +40,11 @@ st.markdown("""
 @st.cache_data(ttl=3600, show_spinner=False)
 def run_investment_analysis(stock_ticker, risk_level):
     today_date = datetime.now().strftime("%Y-%m-%d")
-    my_llm = "gemini/gemini-2.0-flash"
+    my_llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",
+    verbose=True,
+    temperature=0.5,
+    google_api_key=os.getenv("GEMINI_API_KEY")
     
     # 현재가 정보를 에이전트에게 명확히 전달하기 위한 사전 작업
     stock_info = yf.Ticker(stock_ticker).info
@@ -164,6 +169,7 @@ if btn:
         except Exception as e:
 
             st.error(f"오류 발생: {e}")
+
 
 
 
