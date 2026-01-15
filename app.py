@@ -36,7 +36,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # [3] 분석 함수
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def run_investment_analysis(stock_ticker, risk_level):
     today_date = datetime.now().strftime("%Y-%m-%d")
     my_llm = "gemini/gemini-2.0-flash"
@@ -60,6 +60,8 @@ def run_investment_analysis(stock_ticker, risk_level):
         llm=my_llm,
         tools=[FinancialTool(), SerperDevTool()],
         allow_delegation=False
+        max_iter=3, # [중요] 에이전트가 너무 오래 고민하지 않게 실행 횟수 제한 (API 호출 감소)
+        verbose=True
     )
     
     task = Task(
@@ -162,4 +164,5 @@ if btn:
         except Exception as e:
 
             st.error(f"오류 발생: {e}")
+
 
